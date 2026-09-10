@@ -115,13 +115,3 @@ Docstrings и аннотации типов для методов
 
 📄 Лицензия
 Учебный проект, создан в рамках курса SkyPro.
-
----
-
-## 📌 Запустите flake8 для README и создайте коммит
-
-```powershell
-flake8 api ui config conftest.py
-git add .
-git commit -m "Добавлены UI и API автотесты, документация и Allure-отчёт"
-git push origin main
