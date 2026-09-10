@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Allure
+allure-results/
+allure-report/
+final-report/
+results/
+
+# Selenium / WebDriver
+geckodriver.log
+chromedriver.log
+
+# Screenshots
+screenshots/
+
+# VS Code
+.vscode/
+
+# Pickle files
+*.pkl
