@@ -19,12 +19,16 @@ class TestSearchMovie:
         with allure.step("Отправить запрос на поиск 'Аватар'"):
             response = api_client.search_movie("Аватар")
 
+        with allure.step("Проверить статус-код 200"):
+            assert response.status_code == 200
+
         with allure.step("Проверить, что в ответе есть фильмы"):
-            assert "films" in response
-            assert len(response["films"]) > 0
+            data = response.json()
+            assert "films" in data
+            assert len(data["films"]) > 0
 
         with allure.step("Проверить данные первого фильма"):
-            first_film = response["films"][0]
+            first_film = data["films"][0]
             assert first_film["filmId"] == 251733
             assert first_film["nameRu"] == "Аватар"
             assert first_film["nameEn"] == "Avatar"

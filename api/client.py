@@ -23,11 +23,15 @@ class KinopoiskApi:
         }
 
     @allure.step("API. Поиск фильма по ключевому слову: {keyword}")
-    def search_movie(self, keyword: str, page: int = 1) -> dict:
+    def search_movie(
+        self,
+        keyword: str,
+        page: int = 1
+    ) -> requests.Response:
         url = f"{self.base_url}/api/v2.1/films/search-by-keyword"
         params = {"keyword": keyword, "page": page}
         response = requests.get(url, headers=self.headers, params=params)
-        return response.json()
+        return response
 
     @allure.step("API. Получение карточки фильма по ID: {film_id}")
     def get_movie_by_id(self, film_id: int) -> requests.Response:

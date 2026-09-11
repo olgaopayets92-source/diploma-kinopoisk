@@ -2,6 +2,7 @@
 Общие фикстуры для всех тестов проекта.
 """
 import pytest
+from typing import Generator
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -20,11 +21,11 @@ def api_client() -> KinopoiskApi:
 
 
 @pytest.fixture
-def driver():
+def driver() -> Generator[webdriver.Chrome, None, None]:
     """
     Фикстура для создания и закрытия драйвера Chrome.
 
-    :yield: экземпляр WebDriver.
+    :yield: экземпляр WebDriver Chrome.
     """
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)

@@ -1,7 +1,6 @@
 """
 Page Object для главной страницы Кинопоиска.
 """
-import time
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -27,7 +26,20 @@ class MainPage:
 
     @allure.step("Закрыть всплывающее модальное окно")
     def close_modal(self) -> "MainPage":
-        time.sleep(2)
+        """
+        Удаляет модальное окно (реклама, куки и т.п.) через JavaScript.
+
+        Использует WebDriverWait вместо time.sleep для стабильности.
+
+        :return: текущий экземпляр страницы.
+        """
+        # Ждём появления модального окна (или истечения таймаута)
+        WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located(
+                (By.CSS_SELECTOR, ".ReactModal__Overlay")
+            )
+        )
+        # Удаляем модальные окна
         self.driver.execute_script(
             "document.querySelectorAll('.ReactModal__Overlay')"
             ".forEach(el => el.remove());"
